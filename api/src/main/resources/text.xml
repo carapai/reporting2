@@ -1,0 +1,318 @@
+<org.openmrs.module.reporting.report.definition.ReportDefinition id="1" uuid="9c85e20b-c3ce-4dc1-b332-13f1d02f1c5c" retired="false">
+    <name>Appointments List</name>
+    <description>Appointments List</description>
+    <creator id="2" uuid="ddc4540c-fafc-11e5-a6f8-a0e69e66237e"/>
+    <dateCreated id="3">2018-01-30 10:37:52 UTC</dateCreated>
+    <parameters id="4">
+        <org.openmrs.module.reporting.evaluation.parameter.Parameter id="5">
+            <name>startDate</name>
+            <label>Start date</label>
+            <type>java.util.Date</type>
+            <required>true</required>
+        </org.openmrs.module.reporting.evaluation.parameter.Parameter>
+        <org.openmrs.module.reporting.evaluation.parameter.Parameter id="6">
+            <name>endDate</name>
+            <label>End date</label>
+            <type>java.util.Date</type>
+            <required>true</required>
+        </org.openmrs.module.reporting.evaluation.parameter.Parameter>
+    </parameters>
+    <baseCohortDefinition id="7">
+        <parameterizable class="org.openmrs.module.reporting.cohort.definition.MappedParametersCohortDefinition" id="8" retired="false">
+            <parameters reference="4"/>
+            <wrapped id="9">
+                <parameterizable class="org.openmrs.module.reporting.cohort.definition.DateObsCohortDefinition" id="10" retired="false">
+                    <parameters id="11">
+                        <org.openmrs.module.reporting.evaluation.parameter.Parameter id="12">
+                            <name>value1</name>
+                            <label>value1</label>
+                            <type>java.util.Date</type>
+                            <required>true</required>
+                        </org.openmrs.module.reporting.evaluation.parameter.Parameter>
+                        <org.openmrs.module.reporting.evaluation.parameter.Parameter id="13">
+                            <name>value2</name>
+                            <label>value2</label>
+                            <type>java.util.Date</type>
+                            <required>true</required>
+                        </org.openmrs.module.reporting.evaluation.parameter.Parameter>
+                    </parameters>
+                    <timeModifier>ANY</timeModifier>
+                    <question id="14" uuid="dcac04cf-30ab-102d-86b0-7a5022ba4115"/>
+                    <encounterTypeList class="java.util.Arrays$ArrayList" id="15">
+                        <a class="encounterType-array" id="16">
+                            <encounterType id="17" uuid="8d5b2be0-c2cc-11de-8d13-0010c6dffd0f"/>
+                        </a>
+                    </encounterTypeList>
+                    <operator1>GREATER_EQUAL</operator1>
+                    <operator2>LESS_EQUAL</operator2>
+                </parameterizable>
+                <parameterMappings id="18">
+                    <entry>
+                        <string>value2</string>
+                        <string>${endDate}</string>
+                    </entry>
+                    <entry>
+                        <string>value1</string>
+                        <string>${startDate}</string>
+                    </entry>
+                </parameterMappings>
+            </wrapped>
+        </parameterizable>
+        <parameterMappings id="19">
+            <entry>
+                <string>endDate</string>
+                <string>${endDate}</string>
+            </entry>
+            <entry>
+                <string>startDate</string>
+                <string>${startDate}</string>
+            </entry>
+        </parameterMappings>
+    </baseCohortDefinition>
+    <dataSetDefinitions class="linked-hash-map" id="20">
+        <entry>
+            <string>APPOINTMENT_LIST</string>
+            <org.openmrs.module.reporting.evaluation.parameter.Mapped id="21">
+                <parameterizable class="org.openmrs.module.reporting.dataset.definition.PatientDataSetDefinition" id="22" retired="false">
+                    <name>Appointments List</name>
+                    <parameters reference="4"/>
+                    <columnDefinitions id="23">
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="24" uuid="b329d576-e00c-4968-bf6e-208f3e850c3c" retired="false">
+                            <name>Clinic No</name>
+                            <parameters id="25"/>
+                            <dataDefinition id="26">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.ConvertedPatientDataDefinition" id="27" retired="false">
+                                    <parameters id="28"/>
+                                    <definitionToConvert id="29">
+                                        <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PreferredIdentifierDataDefinition" id="30" retired="false">
+                                            <parameters id="31"/>
+                                            <identifierType id="32" uuid="e1731641-30ab-102d-86b0-7a5022ba4115"/>
+                                        </parameterizable>
+                                        <parameterMappings id="33"/>
+                                    </definitionToConvert>
+                                    <converters class="java.util.Arrays$ArrayList" id="34">
+                                        <a class="org.openmrs.module.reporting.data.converter.DataConverter-array" id="35">
+                                            <org.openmrs.module.reporting.data.converter.PropertyConverter id="36">
+                                                <typeToConvert>org.openmrs.PatientIdentifier</typeToConvert>
+                                                <propertyName>identifier</propertyName>
+                                            </org.openmrs.module.reporting.data.converter.PropertyConverter>
+                                        </a>
+                                    </converters>
+                                </parameterizable>
+                                <parameterMappings id="37"/>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="38" uuid="222cf977-b6a4-4bcb-8392-9c1d1c2dc2e6" retired="false">
+                            <name>EID No</name>
+                            <parameters id="39"/>
+                            <dataDefinition id="40">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.ConvertedPatientDataDefinition" id="41" retired="false">
+                                    <parameters id="42"/>
+                                    <definitionToConvert id="43">
+                                        <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PreferredIdentifierDataDefinition" id="44" retired="false">
+                                            <parameters id="45"/>
+                                            <identifierType id="46" uuid="2c5b695d-4bf3-452f-8a7c-fe3ee3432ffe"/>
+                                        </parameterizable>
+                                        <parameterMappings id="47"/>
+                                    </definitionToConvert>
+                                    <converters class="java.util.Arrays$ArrayList" id="48">
+                                        <a class="org.openmrs.module.reporting.data.converter.DataConverter-array" id="49">
+                                            <org.openmrs.module.reporting.data.converter.PropertyConverter id="50">
+                                                <typeToConvert>org.openmrs.PatientIdentifier</typeToConvert>
+                                                <propertyName>identifier</propertyName>
+                                            </org.openmrs.module.reporting.data.converter.PropertyConverter>
+                                        </a>
+                                    </converters>
+                                </parameterizable>
+                                <parameterMappings id="51"/>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="52" uuid="714b1934-6f35-4ac8-b6a7-9abbc6d99fbd" retired="false">
+                            <name>Family Name</name>
+                            <parameters id="53"/>
+                            <dataDefinition id="54">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.ConvertedPatientDataDefinition" id="55" retired="false">
+                                    <parameters id="56"/>
+                                    <definitionToConvert id="57">
+                                        <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PersonToPatientDataDefinition" id="58" retired="false">
+                                            <parameters id="59"/>
+                                            <joinedDefinition class="org.openmrs.module.reporting.data.person.definition.PreferredNameDataDefinition" id="60" retired="false">
+                                                <parameters id="61"/>
+                                            </joinedDefinition>
+                                        </parameterizable>
+                                        <parameterMappings id="62"/>
+                                    </definitionToConvert>
+                                    <converters id="63">
+                                        <org.openmrs.module.reporting.data.converter.PropertyConverter id="64">
+                                            <typeToConvert>org.openmrs.PersonName</typeToConvert>
+                                            <propertyName>familyName</propertyName>
+                                        </org.openmrs.module.reporting.data.converter.PropertyConverter>
+                                    </converters>
+                                </parameterizable>
+                                <parameterMappings id="65"/>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="66" uuid="7ed53a34-dca1-48c8-94a9-31584666f1c2" retired="false">
+                            <name>Given Name</name>
+                            <parameters id="67"/>
+                            <dataDefinition id="68">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.ConvertedPatientDataDefinition" id="69" retired="false">
+                                    <parameters id="70"/>
+                                    <definitionToConvert id="71">
+                                        <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PersonToPatientDataDefinition" id="72" retired="false">
+                                            <parameters id="73"/>
+                                            <joinedDefinition class="org.openmrs.module.reporting.data.person.definition.PreferredNameDataDefinition" id="74" retired="false">
+                                                <parameters id="75"/>
+                                            </joinedDefinition>
+                                        </parameterizable>
+                                        <parameterMappings id="76"/>
+                                    </definitionToConvert>
+                                    <converters id="77">
+                                        <org.openmrs.module.reporting.data.converter.PropertyConverter id="78">
+                                            <typeToConvert>org.openmrs.PersonName</typeToConvert>
+                                            <propertyName>familyName</propertyName>
+                                        </org.openmrs.module.reporting.data.converter.PropertyConverter>
+                                    </converters>
+                                </parameterizable>
+                                <parameterMappings id="79"/>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="80" uuid="be1e687c-13b3-407f-ac94-d8c7b0b0dba2" retired="false">
+                            <name>Sex</name>
+                            <parameters id="81"/>
+                            <dataDefinition id="82">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PersonToPatientDataDefinition" id="83" retired="false">
+                                    <parameters id="84"/>
+                                    <joinedDefinition class="org.openmrs.module.reporting.data.person.definition.GenderDataDefinition" id="85" retired="false">
+                                        <parameters id="86"/>
+                                    </joinedDefinition>
+                                </parameterizable>
+                                <parameterMappings id="87"/>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="88" uuid="d0049ebe-eb91-4cf4-b170-d989a90f5c17" retired="false">
+                            <name>Birth Date</name>
+                            <parameters id="89"/>
+                            <dataDefinition id="90">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.ConvertedPatientDataDefinition" id="91" retired="false">
+                                    <parameters id="92"/>
+                                    <definitionToConvert id="93">
+                                        <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PersonToPatientDataDefinition" id="94" retired="false">
+                                            <parameters id="95"/>
+                                            <joinedDefinition class="org.openmrs.module.reporting.data.person.definition.BirthdateDataDefinition" id="96" retired="false">
+                                                <parameters id="97"/>
+                                            </joinedDefinition>
+                                        </parameterizable>
+                                        <parameterMappings id="98"/>
+                                    </definitionToConvert>
+                                </parameterizable>
+                                <parameterMappings id="99"/>
+                                <converters id="100">
+                                    <org.openmrs.module.ugandaemrreports.definition.data.converter.BirthDateConverter id="101"/>
+                                </converters>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="102" uuid="caceebfe-402c-458f-ad9f-0dd8e92fca3f" retired="false">
+                            <name>Appointment Date</name>
+                            <parameters id="103"/>
+                            <dataDefinition id="104">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.ConvertedPatientDataDefinition" id="105" retired="false">
+                                    <parameters reference="4"/>
+                                    <definitionToConvert id="106">
+                                        <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PersonToPatientDataDefinition" id="107" retired="false">
+                                            <parameters id="108"/>
+                                            <joinedDefinition class="org.openmrs.module.reporting.data.person.definition.ObsForPersonDataDefinition" id="109" retired="false">
+                                                <parameters id="110">
+                                                    <org.openmrs.module.reporting.evaluation.parameter.Parameter id="111">
+                                                        <name>valueDatetimeOrAfter</name>
+                                                        <label>valueDatetimeOrAfter</label>
+                                                        <type>java.util.Date</type>
+                                                        <required>true</required>
+                                                    </org.openmrs.module.reporting.evaluation.parameter.Parameter>
+                                                    <org.openmrs.module.reporting.evaluation.parameter.Parameter id="112">
+                                                        <name>valueDatetimeOnOrBefore</name>
+                                                        <label>valueDatetimeOnOrBefore</label>
+                                                        <type>java.util.Date</type>
+                                                        <required>true</required>
+                                                    </org.openmrs.module.reporting.evaluation.parameter.Parameter>
+                                                </parameters>
+                                                <which>LAST</which>
+                                                <question reference="14"/>
+                                                <encounterTypeList class="java.util.Arrays$ArrayList" reference="15"/>
+                                            </joinedDefinition>
+                                        </parameterizable>
+                                        <parameterMappings id="113">
+                                            <entry>
+                                                <string>valueDatetimeOrAfter</string>
+                                                <string>${startDate}</string>
+                                            </entry>
+                                            <entry>
+                                                <string>valueDatetimeOnOrBefore</string>
+                                                <string>${endDate}</string>
+                                            </entry>
+                                        </parameterMappings>
+                                    </definitionToConvert>
+                                    <converters class="java.util.Arrays$ArrayList" id="114">
+                                        <a class="org.openmrs.module.reporting.data.converter.DataConverter-array" id="115">
+                                            <org.openmrs.module.ugandaemrreports.definition.data.converter.ObsValueDatetimeConverter id="116"/>
+                                        </a>
+                                    </converters>
+                                </parameterizable>
+                                <parameterMappings reference="19"/>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                        <org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition id="117" uuid="ea4f3f22-5732-4103-a422-ef192df021ef" retired="false">
+                            <name>Telephone</name>
+                            <parameters id="118"/>
+                            <dataDefinition id="119">
+                                <parameterizable class="org.openmrs.module.reporting.data.patient.definition.ConvertedPatientDataDefinition" id="120" retired="false">
+                                    <parameters id="121"/>
+                                    <definitionToConvert id="122">
+                                        <parameterizable class="org.openmrs.module.reporting.data.patient.definition.PersonToPatientDataDefinition" id="123" retired="false">
+                                            <parameters id="124"/>
+                                            <joinedDefinition class="org.openmrs.module.reporting.data.person.definition.PersonAttributeDataDefinition" id="125" retired="false">
+                                                <name>telephone</name>
+                                                <parameters id="126"/>
+                                                <personAttributeType id="127" uuid="14d4f066-15f5-102d-96e4-000c29c2a5d7"/>
+                                            </joinedDefinition>
+                                        </parameterizable>
+                                        <parameterMappings id="128"/>
+                                    </definitionToConvert>
+                                    <converters class="java.util.Arrays$ArrayList" id="129">
+                                        <a class="org.openmrs.module.reporting.data.converter.DataConverter-array" id="130">
+                                            <org.openmrs.module.reporting.data.converter.PropertyConverter id="131">
+                                                <typeToConvert>org.openmrs.PersonAttribute</typeToConvert>
+                                                <propertyName>value</propertyName>
+                                            </org.openmrs.module.reporting.data.converter.PropertyConverter>
+                                        </a>
+                                    </converters>
+                                </parameterizable>
+                                <parameterMappings id="132"/>
+                            </dataDefinition>
+                        </org.openmrs.module.reporting.dataset.column.definition.RowPerObjectColumnDefinition>
+                    </columnDefinitions>
+                    <rowFilters id="133">
+                        <org.openmrs.module.reporting.evaluation.parameter.Mapped id="134">
+                            <parameterizable class="org.openmrs.module.reporting.cohort.definition.MappedParametersCohortDefinition" id="135" retired="false">
+                                <parameters reference="4"/>
+                                <wrapped id="136">
+                                    <parameterizable class="org.openmrs.module.reporting.cohort.definition.DateObsCohortDefinition" id="137" retired="false">
+                                        <parameters reference="11"/>
+                                        <timeModifier>ANY</timeModifier>
+                                        <question reference="14"/>
+                                        <encounterTypeList class="java.util.Arrays$ArrayList" reference="15"/>
+                                        <operator1>GREATER_EQUAL</operator1>
+                                        <operator2>LESS_EQUAL</operator2>
+                                    </parameterizable>
+                                    <parameterMappings reference="18"/>
+                                </wrapped>
+                            </parameterizable>
+                            <parameterMappings reference="19"/>
+                        </org.openmrs.module.reporting.evaluation.parameter.Mapped>
+                    </rowFilters>
+                </parameterizable>
+                <parameterMappings reference="19"/>
+            </org.openmrs.module.reporting.evaluation.parameter.Mapped>
+        </entry>
+    </dataSetDefinitions>
+</org.openmrs.module.reporting.report.definition.ReportDefinition>

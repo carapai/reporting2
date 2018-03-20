@@ -1,0 +1,12 @@
+{
+  "1": {
+    "name": "Ever Enrolled in",
+    "concepts": {},
+    "encounters": {
+      "1": {
+        "encounterType": "8",
+        "period": "<"
+      }
+    }
+  }
+}

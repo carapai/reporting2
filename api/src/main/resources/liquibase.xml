@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+
+    <changeSet id="reporting2-201712221249" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_category"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_category table
+        </comment>
+        <createTable tableName="reporting2_category">
+            <column name="category_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+
+            <column name="uid" type="char(11)">
+                <constraints nullable="true" unique="true"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <!--<column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="voided_by" type="int"/>
+            <column name="void_reason" type="varchar(255)"/>-->
+
+        </createTable>
+
+        <!--<addForeignKeyConstraint baseTableName="reporting2_category" baseColumnNames="creator"
+                                 constraintName="creator_for_reporting2_category" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_category" baseColumnNames="changed_by"
+                                 constraintName="changed_by_for_reporting2_category" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_category" baseColumnNames="voided_by"
+                                 constraintName="voided_by_for_reporting2_category" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>-->
+    </changeSet>
+
+    <changeSet id="reporting2-201712221255" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_category_option"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_category_option table
+        </comment>
+        <createTable tableName="reporting2_category_option">
+            <column name="category_option_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="uid" type="char(11)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="name" type="varchar(255)"/>
+
+            <!--<column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="voided_by" type="int"/>
+            <column name="void_reason" type="varchar(255)"/>-->
+        </createTable>
+        <!--<addForeignKeyConstraint baseTableName="reporting2_category_option" baseColumnNames="creator"
+                                 constraintName="creator_for_reporting2_category_option" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_category_option" baseColumnNames="changed_by"
+                                 constraintName="changed_by_for_reporting2_category_option" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_category_option" baseColumnNames="voided_by"
+                                 constraintName="voided_by_for_reporting2_category_option" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>-->
+
+    </changeSet>
+
+
+    <changeSet id="reporting2-201712221256" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_category_combination"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_category_combination table
+        </comment>
+        <createTable tableName="reporting2_category_combination">
+            <column name="category_combination_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="uid" type="char(11)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+
+           <!-- <column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="voided_by" type="int"/>
+            <column name="void_reason" type="varchar(255)"/>-->
+        </createTable>
+
+        <!--<addForeignKeyConstraint baseTableName="reporting2_category_combination" baseColumnNames="creator"
+                                 constraintName="creator_for_reporting2_category_combination"
+                                 referencedTableName="users" referencedColumnNames="user_id" deferrable="false"
+                                 initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_category_combination" baseColumnNames="changed_by"
+                                 constraintName="changed_by_for_reporting2_category_combination"
+                                 referencedTableName="users" referencedColumnNames="user_id" deferrable="false"
+                                 initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_category_combination" baseColumnNames="voided_by"
+                                 constraintName="voided_by_for_reporting2_category_combination"
+                                 referencedTableName="users" referencedColumnNames="user_id" deferrable="false"
+                                 initiallyDeferred="false"/>-->
+
+    </changeSet>
+
+
+    <changeSet id="reporting2-201712221301" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_data_element"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_data_element table
+        </comment>
+        <createTable tableName="reporting2_data_element">
+            <column name="data_element_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="uid" type="char(11)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+
+            <!--<column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="voided_by" type="int"/>
+            <column name="void_reason" type="varchar(255)"/>-->
+        </createTable>
+
+        <!--<addForeignKeyConstraint baseTableName="reporting2_data_element" baseColumnNames="creator"
+                                 constraintName="creator_for_reporting2_data_element" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_data_element" baseColumnNames="changed_by"
+                                 constraintName="changed_by_for_reporting2_data_element" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_data_element" baseColumnNames="voided_by"
+                                 constraintName="voided_by_for_reporting2_data_element" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>-->
+
+    </changeSet>
+    <changeSet id="reporting2-201712221302" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_data_element_group"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_data_element_group table
+        </comment>
+        <createTable tableName="reporting2_data_element_group">
+            <column name="data_element_group_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="uid" type="char(11)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+
+            <!--<column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="voided_by" type="int"/>
+            <column name="void_reason" type="varchar(255)"/>-->
+        </createTable>
+
+        <!--<addForeignKeyConstraint baseTableName="reporting2_data_element_group" baseColumnNames="creator"
+                                 constraintName="creator_for_reporting2_data_element_group" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_data_element_group" baseColumnNames="changed_by"
+                                 constraintName="changed_by_for_reporting2_data_element_group"
+                                 referencedTableName="users" referencedColumnNames="user_id" deferrable="false"
+                                 initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_data_element_group" baseColumnNames="voided_by"
+                                 constraintName="voided_by_for_reporting2_data_element_group"
+                                 referencedTableName="users" referencedColumnNames="user_id" deferrable="false"
+                                 initiallyDeferred="false"/>-->
+
+    </changeSet>
+
+    <changeSet id="reporting2-201712221303" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_indicator"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_indicator table
+        </comment>
+        <createTable tableName="reporting2_indicator">
+            <column name="indicator_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="uid" type="char(11)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+
+           <!-- <column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="voided_by" type="int"/>
+            <column name="void_reason" type="varchar(255)"/>-->
+        </createTable>
+
+        <!--<addForeignKeyConstraint baseTableName="reporting2_indicator" baseColumnNames="creator"
+                                 constraintName="creator_for_reporting2_indicator" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_indicator" baseColumnNames="changed_by"
+                                 constraintName="changed_by_for_reporting2_indicator" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_indicator" baseColumnNames="voided_by"
+                                 constraintName="voided_by_for_reporting2_indicator" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>-->
+
+    </changeSet>
+
+
+    <changeSet id="reporting2-201712221325" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_data_set"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_data_set table
+        </comment>
+        <createTable tableName="reporting2_data_set">
+            <column name="data_set_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="uid" type="char(11)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+
+            <column name="numerator" type="varchar(255)"/>
+            <column name="denominator" type="varchar(255)"/>
+            <!--<column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="voided" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="voided_by" type="int"/>
+            <column name="void_reason" type="varchar(255)"/>-->
+        </createTable>
+
+        <!--<addForeignKeyConstraint baseTableName="reporting2_data_set" baseColumnNames="creator"
+                                 constraintName="creator_for_reporting2_data_set" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_data_set" baseColumnNames="changed_by"
+                                 constraintName="changed_by_for_reporting2_data_set" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>
+        <addForeignKeyConstraint baseTableName="reporting2_data_set" baseColumnNames="voided_by"
+                                 constraintName="voided_by_for_reporting2_data_set" referencedTableName="users"
+                                 referencedColumnNames="user_id" deferrable="false" initiallyDeferred="false"/>-->
+
+    </changeSet>
+
+    <changeSet id="reporting2-201712221308" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_category_option_category"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_category_option_category table
+        </comment>
+        <createTable tableName="reporting2_category_option_category">
+            <column name="category_id" type="int"/>
+            <column name="category_option_id" type="int"/>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="reporting2_coc_category_fk"
+                                 baseTableName="reporting2_category_option_category"
+                                 baseColumnNames="category_id" referencedTableName="reporting2_category"
+                                 referencedColumnNames="category_id"/>
+
+        <addForeignKeyConstraint constraintName="reporting2_coc_category_option_fk"
+                                 baseTableName="reporting2_category_option_category"
+                                 baseColumnNames="category_option_id" referencedTableName="reporting2_category_option"
+                                 referencedColumnNames="category_option_id"/>
+    </changeSet>
+
+
+    <changeSet id="reporting2-201712221313" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_category_combination_category"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_category_combination_category table
+        </comment>
+        <createTable tableName="reporting2_category_combination_category">
+            <column name="category_combination_id" type="int"/>
+            <column name="category_id" type="int"/>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="reporting2_ccc_category_combination_fk"
+                                 baseTableName="reporting2_category_combination_category"
+                                 baseColumnNames="category_combination_id"
+                                 referencedTableName="reporting2_category_combination"
+                                 referencedColumnNames="category_combination_id"/>
+
+        <addForeignKeyConstraint constraintName="reporting2_ccc_category_fk"
+                                 baseTableName="reporting2_category_combination_category"
+                                 baseColumnNames="category_id" referencedTableName="reporting2_category"
+                                 referencedColumnNames="category_id"/>
+    </changeSet>
+
+    <changeSet id="reporting2-201712221319" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_data_element_group_data_element"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_data_element_group_data_element table
+        </comment>
+        <createTable tableName="reporting2_data_element_group_data_element">
+            <column name="data_element_group_id" type="int"/>
+            <column name="data_element_id" type="int"/>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="reporting2_degde_data_element_group_fk"
+                                 baseTableName="reporting2_data_element_group_data_element"
+                                 baseColumnNames="data_element_group_id"
+                                 referencedTableName="reporting2_data_element_group"
+                                 referencedColumnNames="data_element_group_id"/>
+
+        <addForeignKeyConstraint constraintName="reporting2_degde_data_element_fk"
+                                 baseTableName="reporting2_data_element_group_data_element"
+                                 baseColumnNames="data_element_id" referencedTableName="reporting2_data_element"
+                                 referencedColumnNames="data_element_id"/>
+    </changeSet>
+
+
+    <changeSet id="reporting2-201712221331" author="carapai">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reporting2_data_set_data_element"/>
+            </not>
+        </preConditions>
+        <comment>
+            Creating the reporting2_data_element_group_data_element table
+        </comment>
+        <createTable tableName="reporting2_data_set_data_element">
+            <column name="data_set_id" type="int"/>
+            <column name="data_element_id" type="int"/>
+        </createTable>
+
+
+        <addForeignKeyConstraint constraintName="reporting2_dsde_data_set_group_fk"
+                                 baseTableName="reporting2_data_set_data_element"
+                                 baseColumnNames="data_set_id"
+                                 referencedTableName="reporting2_data_set"
+                                 referencedColumnNames="data_set_id"/>
+
+        <addForeignKeyConstraint constraintName="reporting2_dsde_data_element_fk"
+                                 baseTableName="reporting2_data_set_data_element"
+                                 baseColumnNames="data_element_id" referencedTableName="reporting2_data_element"
+                                 referencedColumnNames="data_element_id"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,577 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.openmrs.maven.parents</groupId>
+        <artifactId>maven-parent-openmrs-module</artifactId>
+        <version>1.1.0</version>
+    </parent>
+
+    <groupId>org.openmrs.module</groupId>
+    <artifactId>reporting2</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Reporting2</name>
+    <description>no description</description>
+
+    <url>https://wiki.openmrs.org/x/FQ4z</url>
+
+    <scm>
+        <connection>scm:git:git@github.com:openmrs/openmrs-module-reporting2.git</connection>
+        <developerConnection>scm:git:git@github.com:openmrs/openmrs-module-reporting2.git</developerConnection>
+        <url>https://github.com/openmrs/openmrs-module-reporting2/</url>
+    </scm>
+
+    <modules>
+        <module>api</module>
+        <module>omod</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.openmrs.api</groupId>
+                <artifactId>openmrs-api</artifactId>
+                <version>${openMRSVersion}</version>
+                <type>jar</type>
+                <scope>provided</scope>
+
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.lucene</groupId>
+                        <artifactId>lucene-queryparser</artifactId>
+                    </exclusion>
+
+                    <exclusion>
+                        <groupId>org.apache.lucene</groupId>
+                        <artifactId>lucene-queries</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.web</groupId>
+                <artifactId>openmrs-web</artifactId>
+                <version>${openMRSVersion}</version>
+                <type>jar</type>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.api</groupId>
+                <artifactId>openmrs-api</artifactId>
+                <version>${openMRSVersion}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.lucene</groupId>
+                        <artifactId>lucene-queryparser</artifactId>
+                    </exclusion>
+
+                    <exclusion>
+                        <groupId>org.apache.lucene</groupId>
+                        <artifactId>lucene-queries</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.web</groupId>
+                <artifactId>openmrs-web</artifactId>
+                <version>${openMRSVersion}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.test</groupId>
+                <artifactId>openmrs-test</artifactId>
+                <version>${openMRSVersion}</version>
+                <type>pom</type>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${jacksonVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jacksonVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- End OpenMRS core -->
+
+            <!-- custom module -->
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>addresshierarchy-api</artifactId>
+                <version>${addresshierarchyVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>appframework-api</artifactId>
+                <version>${appframeworkVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>appui-omod</artifactId>
+                <version>${appuiVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>calculation-api</artifactId>
+                <version>${calculationVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>dataexchange-api</artifactId>
+                <version>${dataexchangeVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>dataintegrity-api</artifactId>
+                <version>${dataintegrityVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>emrapi-api</artifactId>
+                <version>${emrapiVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>emrapi-api-1.12</artifactId>
+                <version>${emrapiVersion}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs</groupId>
+                <artifactId>event-api</artifactId>
+                <version>${eventVersion}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>formentryapp-omod</artifactId>
+                <version>${formentryappVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>htmlformentryui-api</artifactId>
+                <version>${htmlformentryuiVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>htmlformentry-api</artifactId>
+                <version>${htmlformentryVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>htmlformentry-api-1.10</artifactId>
+                <version>${htmlformentryVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>htmlformentry-api-2.0</artifactId>
+                <version>${htmlformentryVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>idgen-api</artifactId>
+                <version>${idgenVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>legacyui-omod</artifactId>
+                <version>${legacyuiVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>metadatadeploy-api</artifactId>
+                <version>${metadatadeployVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>metadatamapping-api</artifactId>
+                <version>${metadatamappingVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>metadatasharing-api</artifactId>
+                <version>${metadatasharingVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>patientflags-api</artifactId>
+                <version>${patientFlagsVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>providermanagement-api</artifactId>
+                <version>${providermanagementVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>referenceapplication-omod</artifactId>
+                <version>${referenceapplicationVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>registrationcore-api</artifactId>
+                <version>${registrationcoreVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>registrationapp-api</artifactId>
+                <version>${registrationappVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>reporting-api</artifactId>
+                <version>${reportingVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>reporting-api-1.9</artifactId>
+                <version>${reportingVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>reportingcompatibility-api</artifactId>
+                <version>${reportingCompatibilityVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>serialization.xstream-api</artifactId>
+                <version>${serializationxstreamVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>serialization.xstream-api-2.0</artifactId>
+                <version>${serializationxstreamVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.contrib</groupId>
+                <artifactId>testutils</artifactId>
+                <version>${openmrsTestutilsVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>uiframework-api</artifactId>
+                <version>${uiframeworkVersion}</version>
+                <type>jar</type>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>pl.pragmatists</groupId>
+                <artifactId>JUnitParams</artifactId>
+                <version>${junitParamsVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>webservices.rest-omod-common</artifactId>
+                <version>${webservices.restModuleVersion}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.5</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.6</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.json/json -->
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20180130</version>
+            </dependency>
+
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-core</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers-common -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analyzers-common</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-queryparser</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queries -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-queries</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-grouping -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-grouping</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-misc -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-misc</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-join -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-join</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-facet -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-facet</artifactId>
+                <version>7.2.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.janeluo/ikanalyzer -->
+            <dependency>
+                <groupId>com.janeluo</groupId>
+                <artifactId>ikanalyzer</artifactId>
+                <version>2012_u6</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>24.0-jre</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java-tools</artifactId>
+                <version>3.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java-servlet</artifactId>
+                <version>4.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.leangen.graphql</groupId>
+                <artifactId>spqr</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/it.unimi.dsi/fastutil -->
+            <dependency>
+                <groupId>it.unimi.dsi</groupId>
+                <artifactId>fastutil</artifactId>
+                <version>8.1.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/tech.tablesaw/tablesaw-core -->
+            <dependency>
+                <groupId>tech.tablesaw</groupId>
+                <artifactId>tablesaw-core</artifactId>
+                <version>0.11.9</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/tech.tablesaw/tablesaw-plot -->
+            <dependency>
+                <groupId>tech.tablesaw</groupId>
+                <artifactId>tablesaw-plot</artifactId>
+                <version>0.11.9</version>
+            </dependency>
+            
+            <!-- https://mvnrepository.com/artifact/tech.tablesaw/tablesaw-beakerx -->
+            <dependency>
+                <groupId>tech.tablesaw</groupId>
+                <artifactId>tablesaw-beakerx</artifactId>
+                <version>0.11.9</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>openmrs-repo</id>
+            <name>OpenMRS Nexus Repository</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>openmrs-repo</id>
+            <name>OpenMRS Nexus Repository</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <properties>
+        <openMRSVersion>2.0.6</openMRSVersion>
+        <openmrsTestutilsVersion>1.3</openmrsTestutilsVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <webservices.restModuleVersion>2.21.0</webservices.restModuleVersion>
+        <adminuiVersion>1.2.2</adminuiVersion>
+        <addresshierarchyVersion>2.9</addresshierarchyVersion>
+        <allergyuiVersion>1.6</allergyuiVersion>
+        <appframeworkVersion>2.10.0</appframeworkVersion>
+        <appuiVersion>1.8.0</appuiVersion>
+        <appointmentschedulingVersion>1.7.0</appointmentschedulingVersion>
+        <appointmentschedulinguiVersion>1.5.0</appointmentschedulinguiVersion>
+        <calculationVersion>1.2</calculationVersion>
+        <coreappsVersion>1.18.0</coreappsVersion>
+        <databaseBackupVersion>1.3.0</databaseBackupVersion>
+        <dataEntryStatisticsVersion>1.6.0</dataEntryStatisticsVersion>
+        <dataexchangeVersion>1.3.2</dataexchangeVersion>
+        <dataintegrityVersion>4.4.1</dataintegrityVersion>
+        <emrapiVersion>1.23.0</emrapiVersion>
+        <eventVersion>2.6.0</eventVersion>
+        <formentryappVersion>1.4.2</formentryappVersion>
+        <formfilterVersion>1.0.0</formfilterVersion>
+        <htmlformentryuiVersion>1.6.4</htmlformentryuiVersion>
+        <htmlformentryVersion>3.3.2</htmlformentryVersion>
+        <htmlformentryuiVersion>1.6.3</htmlformentryuiVersion>
+        <htmlformentryVersion>3.6.0</htmlformentryVersion>
+        <htmlwidgetsVersion>1.9.0</htmlwidgetsVersion>
+        <idgenVersion>4.4.0</idgenVersion>
+        <jacksonVersion>1.8.3</jacksonVersion>
+        <junitParamsVersion>1.0.4</junitParamsVersion>
+        <legacyuiVersion>1.3.3</legacyuiVersion>
+        <metadatadeployVersion>1.9.0</metadatadeployVersion>
+        <metadatamappingVersion>1.3.3</metadatamappingVersion>
+        <metadatasharingVersion>1.3.0</metadatasharingVersion>
+        <openconceptlabVersion>1.1</openconceptlabVersion>
+        <openwebappsVersion>1.8.0</openwebappsVersion>
+        <patientFlagsVersion>2.0.0-SNAPSHOT</patientFlagsVersion>
+        <providermanagementVersion>2.9.0</providermanagementVersion>
+        <referenceapplicationVersion>2.6.0</referenceapplicationVersion>
+        <referencemetadataVersion>2.6.0</referencemetadataVersion>
+        <registrationappVersion>1.10.0</registrationappVersion>
+        <registrationcoreVersion>1.8.0</registrationcoreVersion>
+        <reportingRestVersion>1.9.0</reportingRestVersion>
+        <reportingVersion>1.15.0</reportingVersion>
+        <reportingCompatibilityVersion>2.0.4</reportingCompatibilityVersion>
+        <reportingUIVersion>1.5.0</reportingUIVersion>
+        <serializationxstreamVersion>0.2.13</serializationxstreamVersion>
+        <uicommonsVersion>2.5.1</uicommonsVersion>
+        <uiframeworkVersion>3.13.0</uiframeworkVersion>
+        <uilibraryVersion>2.0.6</uilibraryVersion>
+        <ugandaemrfingerprintVersion>1.0.1</ugandaemrfingerprintVersion>
+        <xformsVersion>4.3.9</xformsVersion>
+        <httpClientVersion>4.5.5</httpClientVersion>
+    </properties>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.1</version>
+                    <configuration>
+                        <target>1.8</target>
+                        <source>1.8</source>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
